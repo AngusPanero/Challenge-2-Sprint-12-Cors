@@ -2,6 +2,9 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 const PORT = 4001;
+const cors = require("cors")
+
+app.use(cors())
 
 app.get("/", async (req, res) => {
     const url = `https://rickandmortyapi.com/api/character`
@@ -25,7 +28,7 @@ app.get("/:personaje", async (req, res) => {
 
     try{
         const response = await axios.get(url2)
-        const personaje = response.data.results
+        const personaje = response.data.results[0]
         res.json({ personaje })
 
     } catch(error){
